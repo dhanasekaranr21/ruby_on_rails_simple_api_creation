@@ -1,5 +1,5 @@
 class Ms::Api::V1::Site::User::TracksController < ApplicationController
-    before_action :find_track,only: [:show, :update, :destory]
+    before_action :find_track,only: [:show,:update,:destory]
 
     def index
        @tracks=UserTracking.all
@@ -35,9 +35,9 @@ class Ms::Api::V1::Site::User::TracksController < ApplicationController
     end
 
     def destroy
-        @track= UserTracking.find(params[:id])
+        @track=UserTracking.find(params[:id])
         if @track
-           @track.destroy(track_params)
+           @track.destroy
            render json: { message:"track Deleted Successfully"}
         else
            render json: {error:"track Not Deleted"}
@@ -47,7 +47,7 @@ class Ms::Api::V1::Site::User::TracksController < ApplicationController
     private
 
     def track_params
-        params.require(:track).permit(:cookie,:referrer,:localReferrer,:userAgent,:fingerPrint,:url,:ticket_id.:serviceId,:city,:email,:mobile,:flag)
+        params.require(:track).permit(:cookie,:referrer,:localReferrer,:userAgent,:fingerPrint,:url,:ticket_id,:serviceId,:city,:email,:mobile,:flag)
     end
 
     def find_track
