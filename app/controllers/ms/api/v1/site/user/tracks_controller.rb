@@ -26,7 +26,7 @@ class Ms::Api::V1::Site::User::TracksController < ApplicationController
 
     def update
         @track= UserTracking.find(params[:id])
-        if @track.valid?
+        if @track
            @track.update(track_params)
            render json: { message:"track Updated Successfully"}
         else
