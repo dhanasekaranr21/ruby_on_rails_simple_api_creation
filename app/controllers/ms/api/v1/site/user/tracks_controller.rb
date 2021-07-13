@@ -1,5 +1,5 @@
 class Ms::Api::V1::Site::User::TracksController < ApplicationController
-    before_action :find_track,only: [:show,:update,:destory]
+    before_action :find_track,only: [:show]
 
     def index
        @tracks=UserTracking.all
@@ -26,7 +26,7 @@ class Ms::Api::V1::Site::User::TracksController < ApplicationController
 
     def update
         @track= UserTracking.find(params[:id])
-        if @track
+        if @track.valid?
            @track.update(track_params)
            render json: { message:"track Updated Successfully"}
         else
